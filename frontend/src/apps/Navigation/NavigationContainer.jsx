@@ -91,11 +91,11 @@ function Sidebar({ collapsible, isMobile = false }) {
       label: <Link to={'/settings'}>{translate('settings')}</Link>,
       icon: <SettingOutlined />,
     },
-    {
-      key: 'about',
-      label: <Link to={'/about'}>{translate('about')}</Link>,
-      icon: <ReconciliationOutlined />,
-    },
+    // {
+    //   key: 'about',
+    //   label: <Link to={'/about'}>{translate('about')}</Link>,
+    //   icon: <ReconciliationOutlined />,
+    // },
   ];
 
   useEffect(() => {
@@ -151,9 +151,9 @@ function Sidebar({ collapsible, isMobile = false }) {
           cursor: 'pointer',
         }}
       >
-        <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} />
+        {/* <img src={logoIcon} alt="Logo" style={{ marginLeft: '-5px', height: '40px' }} /> */}
 
-        {!showLogoApp && (
+        {/* {!showLogoApp && (
           <img
             src={logoText}
             alt="Logo"
@@ -163,7 +163,8 @@ function Sidebar({ collapsible, isMobile = false }) {
               height: '38px',
             }}
           />
-        )}
+        )} */}
+        <h1>Hanzala ERP</h1>
       </div>
       <Menu
         items={items}

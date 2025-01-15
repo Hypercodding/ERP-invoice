@@ -11,7 +11,7 @@ export default function UpgradeButton() {
 
   return (
     <Badge count={1} size="small">
-      <Button
+      {/* <Button
         type="primary"
         style={{
           float: 'right',
@@ -26,7 +26,7 @@ export default function UpgradeButton() {
         }}
       >
         {translate('Try Entreprise Version')}
-      </Button>
+      </Button> */}
     </Badge>
   );
 }

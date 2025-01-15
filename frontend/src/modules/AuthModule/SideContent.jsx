@@ -20,19 +20,19 @@ export default function SideContent() {
       className="sideContent"
     >
       <div style={{ width: '100%' }}>
-        <img
+        {/* <img
           src={logo}
           alt="IDURAR ERP CRM"
           style={{ margin: '0 0 40px', display: 'block' }}
           height={63}
           width={220}
-        />
+        /> */}
 
         <Title level={1} style={{ fontSize: 28 }}>
-          Free Open Source ERP / CRM
+          Invoice Mangement System
         </Title>
         <Text>
-          Accounting / Invoicing / Quote App <b /> based on Node.js React.js Ant Design
+          Accounting / Invoicing / Quote App <b />
         </Text>
 
         <div className="space20"></div>
