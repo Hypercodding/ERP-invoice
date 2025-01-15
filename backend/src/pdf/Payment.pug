@@ -255,11 +255,6 @@ html
         padding: 20px 0;
         text-align: center;
       }
-      .line{
-        width:100%;
-        border-top: 1px solid #ccc;
-        height: 5px;
-      }
  
   body
     
@@ -273,17 +268,20 @@ html
               
         .col.col-24
           .space  
-        .left.col-12
+        .left.col-14
             h1.invoice
-              | #{translate('Payment Reciept')} 
+              | #{translate('invoice')}
             div 
-              .col.col-8
+              .col.col-7
                 p.strong #{translate('Date')} :
                 p #{moment(model.date).format(dateFormat)}
-              .col.col-9 
-                p.strong #{translate('Reciept Number')}:
+              .col.col-9
+                p.strong #{translate('Expired Date')} :
+                p #{moment(model.expiredDate).format(dateFormat)}
+              .col.col-8 
+                p.strong #{translate('Number')} :
                 p # #{model.number}/#{model.year || ""} 
-              
+               
         .right.col-10
             .billTo
                 p #{translate('Client')} :
@@ -293,17 +291,32 @@ html
                 p #{model.client.email}
         .col.col-24
           .space  
-      main.clearfix
-        
-        .left.col-24
-              .line
-              h3 #{translate('total paid')} : #{moneyFormatter({amount:model.amount})}
-                
+      main
+        table.table-invoice
+          thead
+            tr.tableHeader
+              th.service #{translate('Paid')}
+              th.service #{translate('Total Paid')}
+              th.service #{translate('Total Amount')}
+              th.service #{translate('Remaining')}
+              th.service #{translate('Payment Mode')}
+              th.service #{translate('Payment Status')}
+
+          tbody
+            tr
+              td.service #{model.amount}
+              td.service #{model.invoice.credit}
+              td.service #{model.invoice.total}
+              td.service #{model.invoice.total - model.invoice.credit}
+              td.service #{model.paymentMode.name}
+              td.service #{model.invoice.paymentStatus}
+
+             
         
       .col.col-24
           .space     
       footer.footer-invoice
-        //- | This Payment Reciept was created on a computer and is valid without the signature and seal.
+        //- | Invoice was created on a computer and is valid without the signature and seal.
           
 
    
