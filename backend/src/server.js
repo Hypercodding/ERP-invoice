@@ -2,6 +2,7 @@ require('module-alias/register');
 const mongoose = require('mongoose');
 const { globSync } = require('glob');
 const path = require('path');
+const setupApp = require('./setup/setup');
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
@@ -14,8 +15,26 @@ if (major < 20) {
 require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
 
-mongoose.connect(process.env.DATABASE);
+// mongoose.connect(process.env.DATABASE);
 
+mongoose
+  .connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(async () => {
+    console.log('Connected to MongoDB Atlas');
+
+    // Run setup logic
+    try {
+      await setupApp();
+      console.log('Setup script executed successfully');
+    } catch (setupError) {
+      console.error('Error during setup script execution:', setupError);
+      process.exit(1); // Exit process if setup fails
+    }
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB Atlas:', err);
+    process.exit(1); // Exit process if MongoDB connection fails
+  });
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 mongoose.connection.on('error', (error) => {
