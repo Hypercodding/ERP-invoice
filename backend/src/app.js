@@ -33,7 +33,7 @@ app.use(
       }
     },
     credentials: true, // Allow credentials (cookies, etc.)
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow necessary HTTP methods
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'], // Allow necessary HTTP methods
   })
 );
 
