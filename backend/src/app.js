@@ -18,12 +18,27 @@ const fileUpload = require('express-fileupload');
 // create our Express app
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000', // Local development
+  'https://erp-invoice-management.vercel.app', // Vercel production
+];
+
 app.use(
   cors({
-    origin: 'https://erp-invoice-management.vercel.app/', // Allow requests from this origin
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the origin
+      } else {
+        callback(new Error('Not allowed by CORS')); // Deny the origin
+      }
+    },
     credentials: true, // Allow credentials (cookies, etc.)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow necessary HTTP methods
   })
 );
+
+// Handle preflight OPTIONS request manually (to ensure it works for CORS)
+app.options('*', cors());
 
 app.use(cookieParser());
 app.use(express.json());

@@ -9,7 +9,7 @@ export const BASE_URL =
 
 export const WEBSITE_URL = import.meta.env.PROD
   ? 'http://cloud.idurarapp.com/'
-  : 'https://erp-invoice-management.vercel.app/';
+  : 'http://localhost:3000/';
 export const DOWNLOAD_BASE_URL =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE
     ? import.meta.env.VITE_BACKEND_SERVER + 'download/'
