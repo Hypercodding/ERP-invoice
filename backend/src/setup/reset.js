@@ -2,7 +2,23 @@ require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE);
+mongoose
+  .connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(async () => {
+    console.log('Connected to MongoDB Atlas');
+
+    // Run setup logic
+    try {
+      console.log('Setup script executed successfully');
+    } catch (setupError) {
+      console.error('Error during setup script execution:', setupError);
+      process.exit(1); // Exit process if setup fails
+    }
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB Atlas:', err);
+    process.exit(1); // Exit process if MongoDB connection fails
+  });
 
 async function deleteData() {
   const Admin = require('../models/coreModels/Admin');
